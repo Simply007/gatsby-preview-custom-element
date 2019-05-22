@@ -13,7 +13,7 @@ If you want to use the Gatsby preview custom element in your project in Kentico 
 * Open / create a content model to which you want to add the Gatsby preview custom element
 * Add **Custom element** content element
 * Open configuration of the content element
-* Use following URL as Hosted code URL (HTTPS): https://Simply007.github.io/gatsby-preview-custom-element/dist/element.html
+* Use following URL as Hosted code URL (HTTPS): https://Simply007.github.io/gatsby-preview-custom-element/dist/preview-element.html
 * Provide the following JSON parameters for the custom element to connect it to the appropriate elements
 
 ```json

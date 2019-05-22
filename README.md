@@ -19,7 +19,7 @@ If you want to use the Gatsby preview custom element in your project in Kentico 
 ```json
 {
     "previewApiKey": "<YOUR PREVIEW API KEY>",
-    "previewUrlPattern": "<URL WITH PREVIEW PATTERN MACROS>",
+    "previewUrlPattern": "https://gatby-test-kc-preview/{lang}/{urlslug}",
     "urlSlugElement": "url_pattern",
     "gatsbyWebSocketUrl": "wss://echo.websocket.org"
 }

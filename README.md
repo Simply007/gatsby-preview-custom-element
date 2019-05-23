@@ -26,7 +26,7 @@ If you want to use the Gatsby preview custom element in your project in Kentico 
 ```
 ## Installation
 
-Toast UI editor is in repository: https://github.com/Simply007/gatsby-preview-custom-element
+Gatsby preview custom element is in repository: https://github.com/Simply007/gatsby-preview-custom-element
 
 If you want to adjust the implementation, first download [Kentico Cloud Custom Elements Devkit](https://github.com/kentico/custom-element-devkit). This repository should be positioned within `/client/custom-elements` folder. For further instructions on devkit implementation, please refer to [Custom Element Devkit README](https://github.com/Kentico/custom-element-devkit/blob/master/readme.md).
 

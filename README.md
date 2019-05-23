@@ -43,7 +43,6 @@ Prerequisites:
 git clone https://github.com/Kentico/custom-element-devkit.git
 cd custom-element-devkit
 git clone https://github.com/Simply007/gatsby-preview-custom-element.git ./client/custom-elements/gatsby-preview-custom-element
-npm install --save tui-editor
 npm start -- -hw
 ```
 

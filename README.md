@@ -48,3 +48,8 @@ npm start -- -hw
 ```
 
 Browse: https://localhost:3000/custom-elements/gatsby-preview-custom-element
+
+## Thanks
+
+
+Thanks to [Martin Hejtmánek](https://github.com/kenticomartinh) and his [Preview availability custom element](https://github.com/kenticomartinh/custom-element-samples/tree/master/PreviewAvailability)

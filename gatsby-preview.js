@@ -10,8 +10,7 @@ var urlSlug = null;
 var projectId = null;
 var urlSlugRegex = /{urlslug}/ig;
 var langRegex = /{lang}/ig;
-var gatsbyWebSocket = null;
-
+var gatsbyWebHookUrl = null;
 
 
 function sendRequestToGatsby() {
@@ -19,7 +18,15 @@ function sendRequestToGatsby() {
 
   // notifying web socket
 
-  gatsbyWebSocket.send(`Changes on item ${codename} performed!`);
+  fetch(gatsbyWebHookUrl, {
+    method: 'POST',
+  })
+    .then(result => {
+      console.log(`Gatsby result is: ${JSON.stringify(result, undefined, 2)}`)
+      showReady();
+    }).catch(error => {
+      console.error(`Gatsby returned error: ${JSON.stringify(error, undefined, 2)}`)
+    });
 }
 
 function updateSize() {
@@ -175,30 +182,25 @@ function initCustomElement() {
         throw Error('Configuration is not valid.')
       }
 
-      gatsbyWebSocket = new WebSocket(config.gatsbyWebSocketUrl);
 
-      gatsbyWebSocket.onopen = function (evt) {
-        console.log("Connection to gatsby opened...");
 
-        projectId = context.projectId;
-        codename = context.item.codename;
-        language = context.variant.codename;
-        urlSlugElement = config.urlSlugElement;
-        if (codename) { // because custom element could be placed to content component - unsupported
-          load(!!urlSlugElement);
-        }
-        else {
-          showNA();
-        }
+      console.log("Connection to gatsby opened...");
 
-        window.addEventListener('resize', updateSize);
-        CustomElement.observeElementChanges([], changed);
-      };
-      gatsbyWebSocket.onmessage = function (evt) {
-        console.log("Received Message: " + evt.data);
-        // TODO error handling
-        showReady();
-      };
+      projectId = context.projectId;
+      codename = context.item.codename;
+      language = context.variant.codename;
+      gatsbyWebHookUrl = config.gatsbyWebHookUrl;
+      urlSlugElement = config.urlSlugElement;
+      if (codename) { // because custom element could be placed to content component - unsupported
+        load(!!urlSlugElement);
+      }
+      else {
+        showNA();
+      }
+
+      window.addEventListener('resize', updateSize);
+      CustomElement.observeElementChanges([], changed);
+
     });
   }
   catch (err) {

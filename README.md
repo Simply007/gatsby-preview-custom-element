@@ -21,7 +21,7 @@ If you want to use the Gatsby preview custom element in your project in Kentico 
     "previewApiKey": "<YOUR PREVIEW API KEY>",
     "previewUrlPattern": "https://gatby-test-kc-preview/{lang}/{urlslug}",
     "urlSlugElement": "url_pattern",
-    "gatsbyWebSocketUrl": "wss://echo.websocket.org"
+    "gatsbyWebHookUrl": "https://webhook.gatsbyjs.com/hooks/data_source/<GUID>"
 }
 ```
 ## Installation

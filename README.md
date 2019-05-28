@@ -13,7 +13,7 @@ If you want to use the Gatsby preview custom element in your project in Kentico 
 * Open / create a content model to which you want to add the Gatsby preview custom element
 * Add **Custom element** content element
 * Open configuration of the content element
-* Use following URL as Hosted code URL (HTTPS): https://Simply007.github.io/gatsby-preview-custom-element/dist/element.html
+* Use following URL as Hosted code URL (HTTPS): https://Simply007.github.io/gatsby-preview-custom-element/dist/preview-element.html
 * Provide the following JSON parameters for the custom element to connect it to the appropriate elements
 
 ```json
@@ -26,7 +26,7 @@ If you want to use the Gatsby preview custom element in your project in Kentico 
 ```
 ## Installation
 
-Toast UI editor is in repository: https://github.com/Simply007/gatsby-preview-custom-element
+Gatsby preview custom element is in repository: https://github.com/Simply007/gatsby-preview-custom-element
 
 If you want to adjust the implementation, first download [Kentico Cloud Custom Elements Devkit](https://github.com/kentico/custom-element-devkit). This repository should be positioned within `/client/custom-elements` folder. For further instructions on devkit implementation, please refer to [Custom Element Devkit README](https://github.com/Kentico/custom-element-devkit/blob/master/readme.md).
 
@@ -43,8 +43,12 @@ Prerequisites:
 git clone https://github.com/Kentico/custom-element-devkit.git
 cd custom-element-devkit
 git clone https://github.com/Simply007/gatsby-preview-custom-element.git ./client/custom-elements/gatsby-preview-custom-element
-npm install --save tui-editor
 npm start -- -hw
 ```
 
 Browse: https://localhost:3000/custom-elements/gatsby-preview-custom-element
+
+## Thanks
+
+
+Thanks to [Martin Hejtmánek](https://github.com/kenticomartinh) and his [Preview availability custom element](https://github.com/kenticomartinh/custom-element-samples/tree/master/PreviewAvailability)

@@ -210,16 +210,4 @@ function initCustomElement() {
 hideAll();
 showPending("Checking preview availability ...");
 
-gatsbyWebSocket = new WebSocket("wss://echo.websocket.org");
-
-gatsbyWebSocket.onopen = function (evt) {
-  console.log("Connection to gatsby opened...");
-};
-
-gatsbyWebSocket.onmessage = function (evt) {
-  console.log("Received Message: " + evt.data);
-  // TODO error handling
-  showReady();
-};
-
 initCustomElement();

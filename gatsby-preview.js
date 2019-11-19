@@ -1,4 +1,6 @@
 import './gatsby-preview.css';
+const debounce = require('lodash.debounce');
+
 
 var lastModified = null;
 var waitTimeout = null;
@@ -13,13 +15,28 @@ var langRegex = /{lang}/ig;
 var gatsbyWebHookUrl = null;
 
 
-function sendRequestToGatsby() {
+function sendRequestToGatsby(changedElementCodenames, item) {
   console.log('Sending request to gatsby!');
 
   // notifying web socket
 
   fetch(gatsbyWebHookUrl, {
     method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      message: {
+        operation: "update",
+        elementCodenames: changedElementCodenames,
+        selectedLanguage: language
+      },
+      data: {
+        items: [
+          item
+        ]
+      }
+    })
   })
     .then(result => {
       console.log(`Gatsby result is: ${JSON.stringify(result, undefined, 2)}`)
@@ -92,10 +109,10 @@ function getItemUrl() {
   return 'https://preview-deliver.kenticocloud.com/' + projectId + '/items/' + codename;
 }
 
-function scheduleWaitForPreview() {
+function scheduleWaitForPreview(changedElementCodenames) {
   if (!waitTimeout) {
     showPending("Checking preview availability ...");
-    waitTimeout = setTimeout(waitForPreview, 1000);
+    waitTimeout = setTimeout(waitForPreview.bind(null, changedElementCodenames), 1000);
   }
 }
 
@@ -109,20 +126,21 @@ function fetchItem() {
   });
 }
 
-function waitForPreview() {
+function waitForPreview(changedElementCodenames) {
   waitTimeout = null;
 
   if (lastModified) {
     fetchItem()
       .then((response) => response.json())
-      .then(({ item }) => {
+      .then((json) => {
+        const item = json.item;
         console.log(`defined lastModified: ${lastModified.toISOString()}`);
         console.log(`received item last modified: ${new Date(item.system.last_modified).toISOString()}`);
         if (item && item.system && !lastModified
           || (new Date(item.system.last_modified).getTime() >= lastModified.getTime())) {
           lastModified = new Date(item.system.last_modified);
           showPending("Sending notification to Gatsby...");
-          sendRequestToGatsby();
+          sendRequestToGatsby(changedElementCodenames, item);
         }
         else {
           scheduleWaitForPreview();
@@ -147,22 +165,22 @@ function waitForPreview() {
   }
 }
 
-function load(updateUrlSlug) {
+function load(updateUrlSlug, changedElementCodenames) {
   if (updateUrlSlug) {
     CustomElement.getElementValue(urlSlugElement, (value) => {
       urlSlug = value;
-      scheduleWaitForPreview();
+      scheduleWaitForPreview(changedElementCodenames);
     });
   }
   else {
-    scheduleWaitForPreview();
+    scheduleWaitForPreview(changedElementCodenames);
   }
 }
 
 function changed(changedElementCodenames) {
   console.log(`changes: ${changedElementCodenames}`)
   var updateUrlSlug = urlSlugElement && (changedElementCodenames.indexOf(urlSlugElement) >= 0);
-  load(updateUrlSlug);
+  load(updateUrlSlug, changedElementCodenames);
 }
 
 function configValid() {
@@ -199,7 +217,9 @@ function initCustomElement() {
       }
 
       window.addEventListener('resize', updateSize);
-      CustomElement.observeElementChanges([], changed);
+      // TODO is is possible to get more then one codename at one time? 
+      // What os thi situation ?
+      CustomElement.observeElementChanges([], debounce(changed, 1000));
 
     });
   }

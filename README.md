@@ -1,4 +1,4 @@
-# Kentico Cloud Gatsby Preview Custom Element
+# Kentico Kontent Gatsby Preview Custom Element
 
 Gatsby preview custom element is watching content changes.
 When the change is performed it sends the notification to the GatsbyJs and notify editor that the preview environment is ready to be previewed.
@@ -7,9 +7,9 @@ When the change is performed it sends the notification to the GatsbyJs and notif
 
 ## Usage
 
-If you want to use the Gatsby preview custom element in your project in Kentico Cloud, follow these steps:
+If you want to use the Gatsby preview custom element in your project in Kentico Kontent, follow these steps:
 
-* In Kentico Cloud open Content types tab
+* In Kentico Kontent open Content types tab
 * Open / create a content model to which you want to add the Gatsby preview custom element
 * Add **Custom element** content element
 * Open configuration of the content element
@@ -28,7 +28,7 @@ If you want to use the Gatsby preview custom element in your project in Kentico 
 
 Gatsby preview custom element is in repository: https://github.com/Simply007/gatsby-preview-custom-element
 
-If you want to adjust the implementation, first download [Kentico Cloud Custom Elements Devkit](https://github.com/kentico/custom-element-devkit). This repository should be positioned within `/client/custom-elements` folder. For further instructions on devkit implementation, please refer to [Custom Element Devkit README](https://github.com/Kentico/custom-element-devkit/blob/master/readme.md).
+If you want to adjust the implementation, first download [Kentico Kontent Custom Elements Devkit](https://github.com/kentico/custom-element-devkit). This repository should be positioned within `/client/custom-elements` folder. For further instructions on devkit implementation, please refer to [Custom Element Devkit README](https://github.com/Kentico/custom-element-devkit/blob/master/readme.md).
 
 ### Get started
 

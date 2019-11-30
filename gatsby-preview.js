@@ -15,7 +15,7 @@ var langRegex = /{lang}/ig;
 var gatsbyWebHookUrl = null;
 
 
-function sendRequestToGatsby(changedElementCodenames, item) {
+function sendRequestToGatsby(changedElementCodenames, response) {
   console.log('Sending request to gatsby!');
 
   // notifying web socket
@@ -32,9 +32,7 @@ function sendRequestToGatsby(changedElementCodenames, item) {
         selectedLanguage: language
       },
       data: {
-        items: [
-          item
-        ]
+        response
       }
     })
   })
@@ -140,7 +138,7 @@ function waitForPreview(changedElementCodenames) {
           || (new Date(item.system.last_modified).getTime() >= lastModified.getTime())) {
           lastModified = new Date(item.system.last_modified);
           showPending("Sending notification to Gatsby...");
-          sendRequestToGatsby(changedElementCodenames, item);
+          sendRequestToGatsby(changedElementCodenames, json);
         }
         else {
           scheduleWaitForPreview();

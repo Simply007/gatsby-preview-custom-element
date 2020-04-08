@@ -8,11 +8,13 @@ var urlSlugElement = null;
 var config = null;
 var language = null;
 var codename = null;
+var id = null;
 var urlSlug = null;
 var projectId = null;
 var urlSlugRegex = /{urlslug}/ig;
 var langRegex = /{lang}/ig;
 var gatsbyWebHookUrl = null;
+var baseDomain = 'https://preview-deliver.kontent.ai';
 
 
 function sendRequestToGatsby(changedElementCodenames, response) {
@@ -29,10 +31,16 @@ function sendRequestToGatsby(changedElementCodenames, response) {
       message: {
         operation: "update",
         elementCodenames: changedElementCodenames,
-        selectedLanguage: language
+        selectedLanguage: language,
+        type: "content_item_variant",
       },
       data: {
-        response
+        items: [{
+          item: {
+            id: response.items[0].system.id
+          },
+        }
+        ]
       }
     })
   })
@@ -104,7 +112,7 @@ function getItemUrl() {
   if (!codename || !projectId) {
     return null;
   }
-  return 'https://preview-deliver.kenticocloud.com/' + projectId + '/items/' + codename;
+  return baseDomain + '/' + projectId + '/items?language=' + language + '&system.id=' + id;
 }
 
 function scheduleWaitForPreview(changedElementCodenames) {
@@ -131,7 +139,7 @@ function waitForPreview(changedElementCodenames) {
     fetchItem()
       .then((response) => response.json())
       .then((json) => {
-        const item = json.item;
+        const item = json.items[0];
         console.log(`defined lastModified: ${lastModified.toISOString()}`);
         console.log(`received item last modified: ${new Date(item.system.last_modified).toISOString()}`);
         if (item && item.system && !lastModified
@@ -151,7 +159,8 @@ function waitForPreview(changedElementCodenames) {
   } else { // initial load
     fetchItem()
       .then((response) => response.json())
-      .then(({ item }) => {
+      .then((json) => {
+        const item = json.items[0];
         lastModified = new Date(item.system.last_modified);
         showReady();
       })
@@ -204,9 +213,11 @@ function initCustomElement() {
 
       projectId = context.projectId;
       codename = context.item.codename;
+      id = context.item.id;
       language = context.variant.codename;
       gatsbyWebHookUrl = config.gatsbyWebHookUrl;
       urlSlugElement = config.urlSlugElement;
+      baseDomain = config.baseDomain;
       if (codename) { // because custom element could be placed to content component - unsupported
         load(!!urlSlugElement);
       }

@@ -16,12 +16,13 @@ If you want to use the Gatsby preview custom element in your project in Kentico 
 * Use following URL as Hosted code URL (HTTPS): https://Simply007.github.io/gatsby-preview-custom-element/build/preview-element.html
 * Provide the following JSON parameters for the custom element to connect it to the appropriate elements
 
-```json
+```jsonc
 {
     "previewApiKey": "<YOUR PREVIEW API KEY>",
     "previewUrlPattern": "https://gatby-test-kc-preview/{lang}/{urlslug}",
     "urlSlugElement": "url_pattern",
-    "gatsbyWebHookUrl": "https://webhook.gatsbyjs.com/hooks/data_source/<GUID>"
+    "gatsbyWebHookUrl": "https://webhook.gatsbyjs.com/hooks/data_source/<GUID>",
+    "baseDomain": "https://your-proxy-for-preview-endpoint.com" // default is "https://preview-deliver.kontent"
 }
 ```
 

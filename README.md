@@ -13,7 +13,7 @@ If you want to use the Gatsby preview custom element in your project in Kentico 
 * Open / create a content model to which you want to add the Gatsby preview custom element
 * Add **Custom element** content element
 * Open configuration of the content element
-* Use following URL as Hosted code URL (HTTPS): https://Simply007.github.io/gatsby-preview-custom-element/dist/preview-element.html
+* Use following URL as Hosted code URL (HTTPS): https://Simply007.github.io/gatsby-preview-custom-element/build/preview-element.html
 * Provide the following JSON parameters for the custom element to connect it to the appropriate elements
 
 ```json
@@ -24,32 +24,45 @@ If you want to use the Gatsby preview custom element in your project in Kentico 
     "gatsbyWebHookUrl": "https://webhook.gatsbyjs.com/hooks/data_source/<GUID>"
 }
 ```
-## Installation
 
-Gatsby preview custom element is in repository: https://github.com/Simply007/gatsby-preview-custom-element
+## Setup
 
-If you want to adjust the implementation, first download [Kentico Kontent Custom Elements Devkit](https://github.com/kentico/custom-element-devkit). This repository should be positioned within `/client/custom-elements` folder. For further instructions on devkit implementation, please refer to [Custom Element Devkit README](https://github.com/Kentico/custom-element-devkit/blob/master/readme.md).
+1. Deploy the code to a secure public host
+    * See [deploying section](#Deploying) for a really quick option
+1. Follow the instructions in the [Kentico Kontent documentation](https://docs.kontent.ai/tutorials/develop-apps/integrate/integrating-your-own-content-editing-features#a-3--displaying-a-custom-element-in-kentico-kontent) to add the element to a content model.
+    * The `Hosted code URL` is where you deployed to in step 1
+    * No JSON parameters are necessary
 
-### Get started
+## Deploying
 
-You could use following commands to set up the development environment
+Netlify has made this easy. If you click the deploy button below, it will guide you through the process of deploying it to Netlify and leave you with a copy of the repository in your GitHub account as well.
+
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/Simply007/gatsby-preview-custom-element)
+
+### Development
+
+You can use following to set up the development environment
 
 Prerequisites:
 
 * Node.js
 * git
 
-```plain
-git clone https://github.com/Kentico/custom-element-devkit.git
-cd custom-element-devkit
-git clone https://github.com/Simply007/gatsby-preview-custom-element.git ./client/custom-elements/gatsby-preview-custom-element
-npm install --save lodash.debounce
-npm start -- -hw
+```console
+git clone https://github.com/Simply007/gatsby-preview-custom-element
+cd gatsby-preview-custom-element
+npm install
+npm run start
 ```
 
-Browse: https://localhost:3000/custom-elements/gatsby-preview-custom-element
+To build for production, run:
+
+```console
+npm run build
+```
+
+then deploy the contents of the `dist` folder.
 
 ## Thanks
-
 
 Thanks to [Martin Hejtmánek](https://github.com/kenticomartinh) and his [Preview availability custom element](https://github.com/kenticomartinh/custom-element-samples/tree/master/PreviewAvailability)

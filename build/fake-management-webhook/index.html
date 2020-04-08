@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Gatsby preview custom element</title>
+  <!-- Kentico Custom elements API-->
+  <script src="https://app.kontent.ai/js-api/custom-element/v1/custom-element.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+</head>
+
+<body>
+  <!-- Custom element HTML-->
+  <div class="content" id="content">
+    <div class="loader">
+      <div class="circle-loader">
+        <div class="checkmark draw"></div>
+      </div>
+    </div>
+    <div class="pending">
+      <h3>Checking preview availability ...</h3>
+    </div>
+    <div class="ready">
+      <h3>Preview is ready</h3>
+      <a class="preview" href="#" target="_blank">Open web preview in a new window</a>
+    </div>
+    <div class="na">
+      <h3>Preview is not configured, please configure preview URL</h3>
+    </div>
+    <div class="clear"></div>
+  </div>
+<script type="text/javascript" src="main.js"></script></body>
+
+</html>

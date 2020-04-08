@@ -29,10 +29,16 @@ function sendRequestToGatsby(changedElementCodenames, response) {
       message: {
         operation: "update",
         elementCodenames: changedElementCodenames,
-        selectedLanguage: language
+        selectedLanguage: language,
+        type: "content_item_variant",
       },
       data: {
-        response
+        items: [{
+          item: {
+            id: response.item.system.id
+          },
+        }
+        ]
       }
     })
   })

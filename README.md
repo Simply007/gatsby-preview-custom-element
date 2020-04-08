@@ -22,7 +22,7 @@ If you want to use the Gatsby preview custom element in your project in Kentico 
     "previewUrlPattern": "https://gatby-test-kc-preview/{lang}/{urlslug}",
     "urlSlugElement": "url_pattern",
     "gatsbyWebHookUrl": "https://webhook.gatsbyjs.com/hooks/data_source/<GUID>",
-    "baseDomain": "https://your-proxy-for-preview-endpoint.com" // default is "https://preview-deliver.kontent"
+    "baseDomain": "https://your-proxy-for-preview-endpoint.com" // default is "https://preview-deliver.kontent.ai"
 }
 ```
 
